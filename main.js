@@ -227,7 +227,7 @@ function addInteraction() {
       }
       measureTooltipElement.innerHTML = output;
       measureTooltip.setPosition(tooltipCoord);
-     
+    
     });
   });
   
@@ -236,7 +236,7 @@ function addInteraction() {
     measureTooltip.setOffset([0, -7]);
     // unset sketch
     sketch = null;
-    measureTooltipElement = null;
+    //measureTooltipElement = null; // removed for the static label of the value 
     createMeasureTooltip();
     unByKey(listener);
   });
@@ -301,10 +301,8 @@ map.addInteraction(modify);
 var modifiedOutput;
 modify.on('modifystart', function (evt) {
   // set sketch
-
   console.log("ok working");
   console.log(geom);
-      
       if (geom instanceof Polygon) {
         modifiedOutput = formatArea(geom);
         tooltipCoord = geom.getInteriorPoint().getCoordinates();
@@ -320,7 +318,9 @@ modify.on('modifystart', function (evt) {
 modify.on('modifyend',function(evt){
   console.log("Okkk finished")
   console.log(measureTooltipElement);
-  
+  measureTooltipElement.setAttribute('id','dynamicInfo');
+  document.getElementById('dynamicInfo').innerHTML = modifiedOutput;
+ 
 });
 
 
